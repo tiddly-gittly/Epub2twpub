@@ -7,12 +7,15 @@ Epub 到 twpub 转换工具。
 
 ## 使用方法
 
-1. 执行`npm i`为项目安装依赖包，出错请尝试npm错误处理方法。
+1. 执行 `npm i` 为项目安装依赖包。若出错请尝试`npm错误处理方法`。
 2. 放置epub图书到epubs目录
-3. npm run build
-4. 等待执行完成，完成后可以在output目录找到转换好的TWPUB书籍。
+3. 执行 `npm run build` 开始转换epubs目录中的所有书籍。
+4. 等待执行完成。
+5. 转换完成后可以在output目录找到转换好的TWPUB书籍。
 
 ## NPM错误处理方法
+
+### playwright安装失败
 
 ```sh
 npm ERR! Error: Failed to download Chromium 112.0.5615.29 (playwright build v1055), caused by
