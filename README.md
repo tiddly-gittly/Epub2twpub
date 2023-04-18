@@ -2,16 +2,17 @@
 Epub 到 twpub 转换工具。
 
 1. 上游代码仓库：https://github.com/TWPUB/TWPUB-Tools
-2. TWPUB书库仓库：https://github.com/Zacharia2/TWPUB-BOOK
+2. 墨屉\TW社区书库：https://github.com/Zacharia2/TWPUB-BOOK
 
 
 ## 使用方法
 
-1. 执行 `npm i` 为项目安装依赖包。若出错请尝试`npm错误处理方法`。
-2. 放置epub图书到epubs目录
-3. 执行 `npm run build` 开始转换epubs目录中的所有书籍。
-4. 等待执行完成。
-5. 转换完成后可以在output目录找到转换好的TWPUB书籍。
+1. 克隆或下载仓库到本地。
+2. 执行 `npm i` 为项目安装依赖包。若出错请尝试`npm错误处理方法`。
+3. 放置epub图书到epubs目录
+4. 执行 `npm run build` 开始转换epubs目录中的所有书籍。
+5. 等待执行完成。
+6. 转换完成后可以在output目录找到转换好的TWPUB书籍。
 
 ## NPM错误处理方法
 
