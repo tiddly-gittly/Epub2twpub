@@ -80,8 +80,8 @@ function slice_epubs(epubFolderPath, outputFolderPath) {
 
     fs.readdir(epubFolderPath, (err, files) => {
         files.forEach(f => {
-            // let fileName = f.split(".")[0];
-            let suffix = f.split('.').pop();
+            let fileName = f.split(".")[0];
+            let suffix = f.substring(f.lastIndexOf(".")+1);
             if (suffix == "epub") {
                 console.log(`Converting "${epubFolderPath}/${f}"`);
                 shellI(`node epub2twpub/index.js --epub "${epubFolderPath}/${f}" --output "${outputFolderPath}/${fileName}.json" || exit 1`);
@@ -90,10 +90,12 @@ function slice_epubs(epubFolderPath, outputFolderPath) {
                 console.log("Non-epub file. Skip Convert :: " + f);
             }
         });
+        console.log("全部转换完成！");
     });
 }
 
 
 module.exports = {
     slice_epubs: slice_epubs,
-};
+    mkdirs: mkdirs,
+}
