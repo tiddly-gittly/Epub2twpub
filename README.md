@@ -38,3 +38,9 @@ npm ERR! Error: Download failure, code=1
    `npm config set registry "http://registry.npmjs.org/"`
 
 这些解决方案应该有助于您解决此错误。
+
+
+## 打包构建
+
+https://github.com/OokTech/TW5-BobEXE/blob/master/package.json
+

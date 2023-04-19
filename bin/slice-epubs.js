@@ -90,10 +90,12 @@ function slice_epubs(epubFolderPath, outputFolderPath) {
                 console.log("Non-epub file. Skip Convert :: " + f);
             }
         });
+        console.log("全部转换完成！");
     });
 }
 
 
 module.exports = {
     slice_epubs: slice_epubs,
-};
+    mkdirs: mkdirs,
+}
