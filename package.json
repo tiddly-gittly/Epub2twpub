@@ -5,6 +5,16 @@
   "main": "index.js",
   "author": "",
   "license": "BSD-3-Clause",
+  "pkg": {
+    "assets": [
+      "bin/fixtures/**/*",
+      "bin/empty-library/*"
+    ],
+    "scripts": [
+      "epub2twpub/**/*.js",
+      "bin/*.js"
+    ]
+  },
   "dependencies": {
     "node-fetch": "^3.3.1",
     "css": "^3.0.0",
@@ -15,7 +25,9 @@
   },
   "scripts": {
     "test": "node epub2twpub/test.js",
+    "pkg": "pkg . -t  node18-win-x64 --out-path dist/",
     "build": "node -e \"require('./bin/slice-epubs').slice_epubs('./output');\"",
     "clean": "node -e \"require('./bin/clean').clean();\""
-  }
+  },
+  "bin": "app.js"
 }
