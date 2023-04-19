@@ -44,3 +44,4 @@ npm ERR! Error: Download failure, code=1
 
 https://github.com/OokTech/TW5-BobEXE/blob/master/package.json
 
+nexe app.js -a windows-x64-14.15.3
