@@ -80,7 +80,7 @@ function slice_epubs(epubFolderPath, outputFolderPath) {
 
     fs.readdir(epubFolderPath, (err, files) => {
         files.forEach(f => {
-            // let fileName = f.split(".")[0];
+            let fileName = f.split(".")[0];
             let suffix = f.split('.').pop();
             if (suffix == "epub") {
                 console.log(`Converting "${epubFolderPath}/${f}"`);

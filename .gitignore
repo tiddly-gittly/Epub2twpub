@@ -4,3 +4,4 @@ dist
 output
 app.exe
 windows-x64-14.15.3
+epubs/*.epub
