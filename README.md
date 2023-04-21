@@ -43,7 +43,3 @@ npm ERR! Error: Download failure, code=1
 ## 打包构建
 
 https://github.com/OokTech/TW5-BobEXE/blob/master/package.json
-
-nexe app.js -a windows-x64-14.15.3
-
-const app = new App(['--epub', `'${epubFolderPath}/${f}'`, '--output', `'${outputFolderPath}/${fileName}.json'`]);

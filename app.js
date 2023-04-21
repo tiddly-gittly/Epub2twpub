@@ -77,7 +77,7 @@ function slice_epubs(epubFolderPath, outputFolderPath) {
 }
 
 
-// 需要考虑异步和同步的问题。异步具有传染性，一个异步全部异步。
+// 需要考虑异步和同步的问题。异步具有传染性，一个异步则全部异步。
 function main() {
     // 加入CL问询功能。
     console.log("开始执行转换！");

@@ -2,7 +2,7 @@
   "name": "twpub-tools",
   "version": "0.1.0",
   "description": "Tools for working with TWPUBs",
-  "main": "index.js",
+  "main": "app.js",
   "author": "",
   "license": "BSD-3-Clause",
   "pkg": {
