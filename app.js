@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 const fs = require("fs"),
-	path = require("path"),
-	{promisify} = require("util"),
-	writeFileAsync = promisify(fs.writeFile),
-	{EpubReader} = require("./epub2twpub/epub-reader"),
-	{TwpubPlugin} = require("./epub2twpub/twpub-plugin");
+    path = require("path"),
+    { promisify } = require("util"),
+    writeFileAsync = promisify(fs.writeFile),
+    { EpubReader } = require("./epub2twpub/epub-reader"),
+    { TwpubPlugin } = require("./epub2twpub/twpub-plugin");
 
 
 let E2T = new Object();
@@ -15,18 +15,18 @@ E2T.version = require("./package.json").version;
 async function e2t_main(epubFile, outputFile) {
 
     // 设置输入输出文件。
-    E2T.epubFile = epubFile; 
+    E2T.epubFile = epubFile;
     E2T.outputFile = outputFile;
 
     // Setup the epub
     E2T.epubReader = new EpubReader(E2T);
     await E2T.epubReader.load(E2T.epubFile);
     // Create the twpub plugin
-    E2T.twpubPlugin = new TwpubPlugin(E2T,{epubReader: E2T.epubReader});
+    E2T.twpubPlugin = new TwpubPlugin(E2T, { epubReader: E2T.epubReader });
     // Convert the epub
     E2T.twpubPlugin.convertEpub();
     // Save the twpub plugin
-    await writeFileAsync(E2T.outputFile,E2T.twpubPlugin.getPluginText(),"utf8");
+    await writeFileAsync(E2T.outputFile, E2T.twpubPlugin.getPluginText(), "utf8");
 
     console.log(`Converted "${epubFile}"`);
 
@@ -59,7 +59,7 @@ function slice_epubs(epubFolderPath, outputFolderPath) {
     fs.readdir(epubFolderPath, (err, files) => {
         files.forEach(f => {
             let fileName = f.split(".")[0];
-            let suffix = f.substring(f.lastIndexOf(".")+1);
+            let suffix = f.substring(f.lastIndexOf(".") + 1);
             if (suffix == "epub") {
                 e2t_main(`${epubFolderPath}/${f}`, `${outputFolderPath}/${fileName}.json`).then(() => {
                     process.exit(0);
@@ -77,7 +77,12 @@ function slice_epubs(epubFolderPath, outputFolderPath) {
 }
 
 
-console.log("开始执行转换！");
-slice_epubs();
-
 // 需要考虑异步和同步的问题。异步具有传染性，一个异步全部异步。
+function main() {
+    // 加入CL问询功能。
+    console.log("开始执行转换！");
+    slice_epubs();
+}
+
+
+main();
