@@ -20,7 +20,7 @@
     "css": "^3.0.0",
     "jszip": "^3.10.1",
     "@xmldom/xmldom": "^0.8.7",
-    "playwright": "1.32.3",
+    "playwright": "1.33.0",
     "tiddlywiki": "5.2.7"
   },
   "scripts": {
