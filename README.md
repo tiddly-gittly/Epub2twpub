@@ -8,11 +8,12 @@ Epub 到 twpub 转换工具。
 ## 使用方法
 
 1. 克隆或下载仓库到本地。
-2. 执行 `npm i` 为项目安装依赖包。若出错请尝试`npm错误处理方法`。
-3. 放置epub图书到epubs目录
-4. 执行 `npm run build` 开始转换epubs目录中的所有书籍。
-5. 等待执行完成。
-6. 转换完成后可以在output目录找到转换好的TWPUB书籍。
+2. 执行`npm install -g pnpm`安装pnpm。
+3. 执行 `pnpm i` 为项目安装依赖包。若出错请尝试`npm错误处理方法`。
+4. 放置epub图书到epubs目录
+5. 执行 `pnpm run build` 开始转换epubs目录中的所有书籍。
+6. 等待执行完成。
+7. 转换完成后可以在output目录找到转换好的TWPUB书籍。
 
 ## NPM错误处理方法
 
