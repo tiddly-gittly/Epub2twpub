@@ -5,8 +5,6 @@ Class representing the jsdom wrapper for get-page-text.js
 const { JSDOM } = require("jsdom");
 const { getStructure } = require("./get-page-text");
 
-const URL_PREFIX = "https://example.com/";
-
 class TextExtractor {
 
   /*
@@ -32,7 +30,6 @@ class TextExtractor {
       return "";
     } else {
       var window = new JSDOM(contents, {
-        url: URL_PREFIX,
         contentType: type,
         runScripts: "dangerously"
       }).window;
