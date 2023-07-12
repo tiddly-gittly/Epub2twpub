@@ -7,6 +7,12 @@ Epub 到 twpub 转换工具。
 
 ## 使用方法
 
+1. 下载twpub-tools.exe到本地，并在它旁边创建一个名为epubs文件夹。
+2. 将epub书籍放入文件夹中。
+3. 双击执行twpub-tools.exe等待完成，完成后可以在output文件夹中看到结果。
+
+## 开发者使用方式
+
 1. 克隆或下载仓库到本地。
 2. 执行`npm install -g pnpm`安装pnpm。
 3. 执行 `pnpm i` 为项目安装依赖包。若出错请尝试`npm错误处理方法`。
@@ -15,32 +21,8 @@ Epub 到 twpub 转换工具。
 6. 等待执行完成。
 7. 转换完成后可以在output目录找到转换好的TWPUB书籍。
 
-## NPM错误处理方法
-
-### playwright安装失败
-
-```sh
-npm ERR! Error: Failed to download Chromium 112.0.5615.29 (playwright build v1055), caused by
-npm ERR! Error: Download failure, code=1
-```
-
-这个错误通常是由于网络代理或防火墙导致的安全证书验证问题引起的。以下是一些可能的解决方案：
-
-1. 禁用代理：如果您使用了代理，请尝试禁用它并重新运行安装程序。
-
-2. 更改网络设置：尝试更改计算机的网络设置，以便让您的计算机直接连接到互联网，而不是通过代理服务器。
-
-3. 更新证书：在某些情况下，您可能需要更新您的操作系统上的根证书。可以在操作系统的证书存储区中手动安装缺失的根证书。
-
-4. 使用npm config命令：尝试使用以下命令配置npm以使用较旧版本的TLS：
-
-   `npm config set strict-ssl false `
-
-   `npm config set registry "http://registry.npmjs.org/"`
-
-这些解决方案应该有助于您解决此错误。
-
-
 ## 打包构建
 
 https://github.com/OokTech/TW5-BobEXE/blob/master/package.json
+
+用pkg把nodejs程序打包成exe：https://juejin.cn/post/7212621497809387557
