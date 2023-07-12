@@ -7,7 +7,7 @@ Epub 到 twpub 转换工具。
 
 ## 使用方法
 
-1. 下载twpub-tools.exe到本地，并在它旁边创建一个名为epubs文件夹。
+1. 下载twpub-tools.exe到本地，并在与程序所在的同级目录中创建一个名为epubs文件夹。
 2. 将epub书籍放入文件夹中。
 3. 双击执行twpub-tools.exe等待完成，完成后可以在output文件夹中看到结果。
 
@@ -20,6 +20,22 @@ Epub 到 twpub 转换工具。
 5. 执行 `pnpm run build` 开始转换epubs目录中的所有书籍。
 6. 等待执行完成。
 7. 转换完成后可以在output目录找到转换好的TWPUB书籍。
+
+## How to use
+
+1. Download twpub-tools.exe locally and create a folder named epubs in the same directory as the program.
+2. Place the epub book in the folder.
+3. Double click to execute twpub-tools.exe and wait for it to finish, when it's done you can see the result in the output folder.
+
+## How to use it for developers
+
+1. Clone or download the repository locally.
+2. Run `npm install -g pnpm` to install pnpm.
+3. Execute `pnpm i` to install the dependencies for the project. If you get an error, try the `npm error handling method`.
+4. Place the epub book in the epubs directory.
+5. Execute `pnpm run build` to start converting all the books in the epubs directory. 6.
+6. Wait for the execution to complete.
+7. After the conversion is finished, you can find the converted TWPUB books in the output directory.
 
 ## 打包构建
 
