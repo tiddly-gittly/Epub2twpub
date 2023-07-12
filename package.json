@@ -2,10 +2,10 @@
   "name": "twpub-tools",
   "version": "0.1.0",
   "description": "Tools for working with TWPUBs",
-  "main": "app.js",
+  "main": "./epub2twpub/index.js",
   "author": "",
   "license": "BSD-3-Clause",
-  "bin": "app.js",
+  "bin": "./app.js",
   "pkg": {
     "assets": [
       "fixtures/**/*",
@@ -22,6 +22,9 @@
     "@xmldom/xmldom": "^0.8.8",
     "tiddlywiki": "5.3.0",
     "jsdom": "22.1.0"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
   },
   "scripts": {
     "test": "node epub2twpub/test.js",

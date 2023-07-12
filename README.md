@@ -1,46 +1,23 @@
+[English](/README.md) | [中文](/README_zh-CN.md)
+
 # Epub2twpub
-Epub 到 twpub 转换工具。
+Epub to twpub conversion tool.
 
-1. 上游代码仓库：https://github.com/TWPUB/TWPUB-Tools
-2. 墨屉\TW社区书库：https://github.com/Zacharia2/TWPUB-BOOK
+1. Upstream code repository: https://github.com/TWPUB/TWPUB-Tools
+2. Ink Drawer\TW Community Book Depository: https://github.com/Zacharia2/TWPUB-BOOK
 
+## How to use
 
-## 使用方法
+1. Download twpub-tools.exe locally and create a folder named epubs in the same directory as the program.
+2. Place the epub book in the folder.
+3. Double click to execute twpub-tools.exe and wait for it to finish, when it's done you can see the result in the output folder.
 
-1. 克隆或下载仓库到本地。
-2. 执行`npm install -g pnpm`安装pnpm。
-3. 执行 `pnpm i` 为项目安装依赖包。若出错请尝试`npm错误处理方法`。
-4. 放置epub图书到epubs目录
-5. 执行 `pnpm run build` 开始转换epubs目录中的所有书籍。
-6. 等待执行完成。
-7. 转换完成后可以在output目录找到转换好的TWPUB书籍。
+## How to use it for developers
 
-## NPM错误处理方法
-
-### playwright安装失败
-
-```sh
-npm ERR! Error: Failed to download Chromium 112.0.5615.29 (playwright build v1055), caused by
-npm ERR! Error: Download failure, code=1
-```
-
-这个错误通常是由于网络代理或防火墙导致的安全证书验证问题引起的。以下是一些可能的解决方案：
-
-1. 禁用代理：如果您使用了代理，请尝试禁用它并重新运行安装程序。
-
-2. 更改网络设置：尝试更改计算机的网络设置，以便让您的计算机直接连接到互联网，而不是通过代理服务器。
-
-3. 更新证书：在某些情况下，您可能需要更新您的操作系统上的根证书。可以在操作系统的证书存储区中手动安装缺失的根证书。
-
-4. 使用npm config命令：尝试使用以下命令配置npm以使用较旧版本的TLS：
-
-   `npm config set strict-ssl false `
-
-   `npm config set registry "http://registry.npmjs.org/"`
-
-这些解决方案应该有助于您解决此错误。
-
-
-## 打包构建
-
-https://github.com/OokTech/TW5-BobEXE/blob/master/package.json
+1. Clone or download the repository locally.
+2. Run `npm install -g pnpm` to install pnpm.
+3. Execute `pnpm i` to install the dependencies for the project. If you get an error, try the `npm error handling method`.
+4. Place the epub book in the epubs directory.
+5. Execute `pnpm run build` to start converting all the books in the epubs directory. 6.
+6. Wait for the execution to complete.
+7. After the conversion is finished, you can find the converted TWPUB books in the output directory.

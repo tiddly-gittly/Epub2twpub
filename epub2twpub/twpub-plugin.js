@@ -50,9 +50,10 @@ class TwpubPlugin {
 		this.fields["count-images"] = Object.keys(this.epubReader.images).length.toString();
 		// Cover tab
 		if(this.epubReader.hasMetadataItem("cover")) {
+			// 仅使用文件名。
 			const href = this.epubReader.getManifestItem(this.epubReader.getMetadataItem("cover")).href;
 			if(href) {
-				this.fields["cover-image"] = this.titlePrefix + "/images/" + this.epubReader.getManifestItem(this.epubReader.getMetadataItem("cover")).href;
+				this.fields["cover-image"] = this.titlePrefix + "/images/" + href;
 				this.addTiddler({
 					title: this.titlePrefix + "/cover",
 					type: "text/vnd.tiddlywiki",
@@ -101,7 +102,10 @@ class TwpubPlugin {
 </$linkcatcher>`
 		});
 	}
-
+	
+	/**
+	 * 创建锚点到标题映射, chunk.href 来着 startChunk()函数。
+	 */
 	createAnchorToTitleMapping() {
 		this.mapAnchorToTitle = Object.create(null);
 		this.epubReader.chunks.forEach((chunk,index) => {
@@ -119,8 +123,13 @@ class TwpubPlugin {
 		});
 	}
 
+	/**
+	 * 制作文本Tiddler标题
+	 * @param {*} index 0-n, 整数
+	 * @returns '$:/plugins/twpub/id/text/000000001'
+	 */
 	makeTextTiddlerTitle(index) {
-		return this.titlePrefix + "/text/" + ("" + index).padStart(9,"0");
+		return this.titlePrefix + "/text/" + index.toString().padStart(9,"0");
 	}
 
 	convertText() {
@@ -157,6 +166,8 @@ class TwpubPlugin {
 						// Replace <img> tags with <$image> widgets
 						case "img":
 							node.tag = "$image";
+							// 图片文件名来自 get-page-text.js文件的 if(e.hasAttribute("src"))段落的 attributes.src语句
+							// 在这里引用图片条目。
 							node.attributes.source = this.titlePrefix + "/images/" + node.attributes.src;
 							delete node.attributes.src;
 							break;
@@ -208,6 +219,9 @@ class TwpubPlugin {
 		visitNodes(chunk.nodes);
 	}
 
+	/**
+	 * @description this.mapAnchorToTitle 来自 createAnchorToTitleMapping() 函数创建的映射。
+	 */
 	convertToc() {
 		const visitNodes = (nodes,tag) => {
 			const titles = [];
@@ -269,6 +283,9 @@ class TwpubPlugin {
 		});
 	}
 
+	/**
+	 * 转换图片为条目，方便复用。
+	 */
 	convertImages() {
 		for(const imagePath in this.epubReader.images) {
 			const imageInfo = this.epubReader.images[imagePath];
