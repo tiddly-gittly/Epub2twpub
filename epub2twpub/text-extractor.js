@@ -1,59 +1,41 @@
 /*
-Class representing the Puppeteer-based wrapper for get-page-text.js
+Class representing the jsdom wrapper for get-page-text.js
 */
 
-const playwright = require("playwright"),
-	{getPageText} = require("./injected/get-page-text");
-
-const URL_PREFIX = "https://example.com/";
+const { JSDOM } = require("jsdom");
+const { getStructure } = require("./get-page-text");
 
 class TextExtractor {
 
-	/*
-	Options:
-	getFile: function(href) returns {type:, contents:}
-	logError: function(msg)
-	*/
-	constructor (options) {
-		this.getFile = options.getFile;
-		this.logError = options.logError;
-	}
+  /*
+  Options:
+  getFile: function(href) returns {type:, contents:}
+  logError: function(msg)
+  */
+  constructor(options) {
+    this.getFile = options.getFile;
+    this.logError = options.logError;
+  }
 
-	async initialise() {
-		this.browser = await playwright.chromium.launch();
-		this.context = await this.browser.newContext({
-			javaScriptEnabled: false
-		});
-		this.page = await this.context.newPage();
-		await this.page.route("**/*",async (route) => {
-			const request = route.request();
-			if(request.method() === "GET" && request.url().startsWith(URL_PREFIX)) {
-				const fileHref = request.url().slice(URL_PREFIX.length);
-				const {type,contents} = await this.getFile(fileHref);
-				if(!type) {
-					this.logError(`Missing file \`${fileHref}\``);
-					route.fulfill({status: 404, contentType: "text/plain", body: "Not found!"});
-				} else  {
-					route.fulfill({status: 200, contentType: type, body: contents});
-				}
-			} else {
-				route.abort();
-			}
-		});
-	}
-
-	async getPageText(href) {
-	// console.log("processing page",href)
-	// 这里用playwright的headless浏览器加载图书页面，然后返回这个页面的evaluate。
-		const pageURL = URL_PREFIX + href;
-		await this.page.goto(pageURL,{waitUntil: "load"});
-		return await this.page.evaluate(getPageText);
-	}
-
-	async close() {
-		await this.page.close();
-		await this.browser.close();
-	}
+  /**
+   * @description 从文件中获取内容，使用这个内容通过JSDOM获得dom对象。然后通过getPageText传入DOm获得格式化的结构。
+   * @param {string} href 文件名。
+   * @returns 返回一个结构：{chunks: [], stylsheets: [text]}。
+   */
+  async getPageText(href) {
+    // href是一个文件名。
+    const { type, contents } = await this.getFile(href);
+    if (!type) {
+      this.logError(`Missing file \`${href}\``);
+      return "";
+    } else {
+      var window = new JSDOM(contents).window;
+      var document = window.document;
+      var result = getStructure(window, document);
+      console.log(result);
+    }
+    return result;
+  }
 
 }
 
