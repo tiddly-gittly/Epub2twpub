@@ -2,7 +2,7 @@
 Run tests of getPageText() from HTML files in the ./fixtures/html/ directory
 */
 
-const inputDir = "./bin/fixtures/html/";
+const inputDir = "./fixtures/html/";
 
 const fs = require("fs"),
 	path = require("path"),
