@@ -5,9 +5,10 @@
   "main": "app.js",
   "author": "",
   "license": "BSD-3-Clause",
+  "bin": "app.js",
   "pkg": {
     "assets": [
-      "bin/fixtures/**/*",
+      "fixtures/**/*",
       "bin/empty-library/*"
     ],
     "scripts": [
@@ -27,6 +28,5 @@
     "pkg": "pkg . -t  node18-win-x64 --out-path output/dist",
     "build": "node -e \"require('./bin/slice-epubs').slice_epubs();\"",
     "clean": "node -e \"require('./bin/clean').clean();\""
-  },
-  "bin": "app.js"
+  }
 }
