@@ -229,14 +229,16 @@ class EpubReader {
 			const manifestItem = this.manifest[id];
 			if(manifestItem["media-type"].split("/")[0] === "image" ) {
 				const file = this.zip.file(manifestItem.href),
-					encoding = BINARY_MEDIA_TYPES.includes(manifestItem["media-type"]) ? "base64" : "text";
+					encoding = BINARY_MEDIA_TYPES.includes(manifestItem["media-type"]) ? "base64" : "text",
+					filename = manifestItem.href.substring(manifestItem.href.lastIndexOf('/') + 1);
+					// 仅使用文件名。
 				if(file) {
-					this.images[manifestItem.href] = {
+					this.images[filename] = {
 						type: manifestItem["media-type"],
 						text: await file.async(encoding)
 					};
 				} else {
-					this.logError(`Missing image: ${manifestItem.href}`);
+					this.logError(`Missing image: ${filename}`);
 				}
 			}
 		}

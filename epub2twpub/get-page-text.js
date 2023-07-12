@@ -1,5 +1,5 @@
 /*
-This script is executed within the context of a web page loaded into Puppeteer to extract the text chunks and stylesheets from a page.
+To extract the text chunks and stylesheets from a page.
 
 Returns a structure: {chunks: [], stylsheets: [text]}
 
@@ -127,7 +127,11 @@ return {
 	expectedResults: expectedResults
 };
 
-// Node iterator
+/**
+ * Node iterator
+ * @param {*} e 文档元素
+ * @param {*} options 选项，目前主要是disableBlockProcessing？
+ */
 function visitNode(e,options) {
 	options = options || {};
 	var disableBlockProcessing = !!options.disableBlockProcessing;
@@ -156,7 +160,8 @@ function visitNode(e,options) {
 				parentListElement.private.count = count;
 			} else if(nodeInfo.tag === "img") {
 				if(e.hasAttribute("src")) {
-					nodeInfo.attributes.src = e.src.slice(URL_PREFIX.length);
+					// 图片不显示时，需要注意的地方，仅需要文件名。
+					nodeInfo.attributes.src = e.src;
 				}
 				if(e.hasAttribute("width")) {
 					nodeInfo.attributes.width = e.getAttribute("width");
@@ -172,6 +177,10 @@ function visitNode(e,options) {
 				}
 			} else if(nodeInfo.tag === "a") {
 				if(e.href) {
+					// 需要修复，41601.html、/read/ba-shi-jian-dang-zuo-peng-you/Chapter0.md
+					// Missing link to www/wwwroot/www.bookstack.cn/cache/books/ba-shi-jian-dang-zuo-peng-you/458613.html
+					// 它有正常的链接：http://en.wikipedia.org/wiki/Metacognition
+					// console.log(e.href);
 					nodeInfo.attributes.href = e.href;
 				}
 			}

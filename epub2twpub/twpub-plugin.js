@@ -157,6 +157,7 @@ class TwpubPlugin {
 						// Replace <img> tags with <$image> widgets
 						case "img":
 							node.tag = "$image";
+							// 图片文件名来自 get-page-text.js文件的 if(e.hasAttribute("src"))段落的 attributes.src语句
 							node.attributes.source = this.titlePrefix + "/images/" + node.attributes.src;
 							delete node.attributes.src;
 							break;
@@ -224,6 +225,8 @@ class TwpubPlugin {
 				target = target.slice(1);
 			}
 			const targetTitle = this.mapAnchorToTitle[target];
+			// console.log(this.mapAnchorToTitle[target]); 是 undefined。
+			// 需要修复。Missing link to www/wwwroot/www.bookstack.cn/cache/books/ba-shi-jian-dang-zuo-peng-you/41601.html
 			if(!targetTitle) {
 				console.log("Missing link to",target)
 			}
