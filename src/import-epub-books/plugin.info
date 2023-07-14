@@ -1,0 +1,9 @@
+{
+  "title": "$:/plugins/whitefall/import-epub-books",
+  "name": "Import epub books",
+  "author": "whitefall",
+  "description": "导入你的epub书籍",
+  "plugin-type": "plugin",
+  "version": "0.0.1",
+  "list": "readme"
+}
