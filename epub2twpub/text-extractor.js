@@ -8,11 +8,12 @@ const URL_PREFIX = "https://example.com/";
 
 class TextExtractor {
 
-  /*
-  Options:
-  getFile: function(href) returns {type:, contents:}
-  logError: function(msg)
-  */
+  /**
+   * Options:
+   * @param {*} options 
+   * @field getFile: function(href) returns {type:, contents:}
+   * @field logError: function(msg)
+   */
   constructor(options) {
     this.getFile = options.getFile;
     this.logError = options.logError;
