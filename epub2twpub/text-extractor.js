@@ -1,9 +1,9 @@
 /*
-Class representing the jsdom wrapper for get-page-text.js
+Class representing the jsdom wrapper for get-page-struct.js
 */
 
 const { JSDOM } = require("jsdom");
-const { getStructure } = require("./get-page-text");
+const { getPageStruct } = require("./get-page-struct");
 const URL_PREFIX = "https://example.com/";
 
 class TextExtractor {
@@ -37,7 +37,7 @@ class TextExtractor {
         runScripts: "dangerously"
       }).window;
       var document = window.document;
-      var result = getStructure(window, document);
+      var result = getPageStruct(window, document);
     }
     return result;
   }

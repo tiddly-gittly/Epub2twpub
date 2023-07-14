@@ -242,7 +242,7 @@ class EpubReader {
 				const file = this.zip.file(manifestItem.href),
 					encoding = BINARY_MEDIA_TYPES.includes(manifestItem["media-type"]) ? "base64" : "text";
 				if(file) {
-					// 仅使用图片文件名。
+					// Use only picture file names.
 					this.images[manifestItem.href] = {
 						type: manifestItem["media-type"],
 						text: await file.async(encoding)

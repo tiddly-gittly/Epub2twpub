@@ -11,7 +11,7 @@
  * @param {*} doc DOM model instance of the current document
  * @returns Returns a structure: {chunks: [], stylsheets: [text]}
  */
-exports.getStructure = function(win,doc) {
+exports.getPageStruct = function(win,doc) {
 	win = win || window;
 	doc = doc || document;
 

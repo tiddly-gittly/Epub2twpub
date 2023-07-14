@@ -124,7 +124,7 @@ class TwpubPlugin {
 	}
 
 	/**
-	 * 制作文本Tiddler标题
+	 * Make text tiddler title
 	 * @param {*} index 0-n, integer
 	 * @returns Similar: '$:/plugins/twpub/id/text/000000001'
 	 */
