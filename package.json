@@ -7,10 +7,6 @@
   "license": "BSD-3-Clause",
   "bin": "./app.js",
   "pkg": {
-    "assets": [
-      "fixtures/**/*",
-      "bin/empty-library/*"
-    ],
     "scripts": [
       "epub2twpub/**/*.js",
       "bin/*.js"
