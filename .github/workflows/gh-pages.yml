@@ -41,7 +41,7 @@ jobs:
         run: pnpm run publish
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
           path: ./dist
