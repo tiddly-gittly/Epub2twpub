@@ -8,8 +8,7 @@
   "bin": "./app.js",
   "pkg": {
     "scripts": [
-      "epub2twpub/**/*.js",
-      "bin/*.js"
+      "epub2twpub/**/*.js"
     ]
   },
   "dependencies": {
@@ -24,6 +23,7 @@
   },
   "scripts": {
     "test": "node epub2twpub/test.js",
+    "testApp": "node app.js",
     "pkg": "pkg . -t  node18-win-x64 --out-path output/dist",
     "build": "node -e \"require('./bin/slice-epubs').slice_epubs();\"",
     "clean": "node -e \"require('./bin/clean').clean();\""

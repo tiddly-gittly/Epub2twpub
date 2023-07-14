@@ -8,28 +8,18 @@ const fs = require("fs"),
     { TwpubPlugin } = require("./epub2twpub/twpub-plugin");
 
 
-let E2T = new Object();
-E2T.version = require("./package.json").version;
-
-
 async function e2t_main(epubFile, outputFile) {
-
-    // 设置输入输出文件。
-    E2T.epubFile = epubFile;
-    E2T.outputFile = outputFile;
-
+    let e2t = { version: "" };
+    e2t.version = require("./package.json").version;
     // Setup the epub
-    E2T.epubReader = new EpubReader(E2T);
-    await E2T.epubReader.load(E2T.epubFile);
+    let epubReader = new EpubReader(e2t);
+    await epubReader.load(epubFile);
     // Create the twpub plugin
-    E2T.twpubPlugin = new TwpubPlugin(E2T, { epubReader: E2T.epubReader });
+    let twpubPlugin = new TwpubPlugin(e2t, { epubReader: epubReader });
     // Convert the epub
-    E2T.twpubPlugin.convertEpub();
+    twpubPlugin.convertEpub();
     // Save the twpub plugin
-    await writeFileAsync(E2T.outputFile, E2T.twpubPlugin.getPluginText(), "utf8");
-
-    console.log(`Converted "${epubFile}"`);
-
+    await writeFileAsync(outputFile, twpubPlugin.getPluginText(), "utf8");
 }
 
 
@@ -48,7 +38,7 @@ function mkdirs(dirs) {
  * @param {string} epubFolderPath epub文件夹路径，空或者不填默认为'./epubs'
  * @param {string} outputFolderPath 输出文件夹路径，空或者不填默认为'./output'
 */
-function slice_epubs(epubFolderPath, outputFolderPath) {
+async function slice_epubs(epubFolderPath, outputFolderPath) {
 
     // 检查参数。 
     if (typeof epubFolderPath !== 'string' || epubFolderPath.length === 0) epubFolderPath = './epubs';
@@ -56,32 +46,34 @@ function slice_epubs(epubFolderPath, outputFolderPath) {
 
     mkdirs(outputFolderPath);
 
-    fs.readdir(epubFolderPath, (err, files) => {
-        files.forEach(f => {
-            let fileName = f.split(".")[0];
-            let suffix = f.substring(f.lastIndexOf(".") + 1);
-            if (suffix == "epub") {
-                e2t_main(`${epubFolderPath}/${f}`, `${outputFolderPath}/${fileName}.json`).then(() => {
-                    process.exit(0);
-                }).catch(err => {
-                    console.error(err);
-                    process.exit(1);
-                });
-                // shellI(`node epub2twpub/index.js --epub "${epubFolderPath}/${f}" --output "${outputFolderPath}/${fileName}.json" || exit 1`);
-                // TODO：我们可以通过shell函数 + 捕获错误的方法，筛选出不可以转换的书籍。我们可以把他加入到失败列表，并永久从成功列表删除，直到可以被转换。
-            } else {
-                console.log(`Skip Convert :: "${f}" Non-epub file.`);
+    let files = fs.readdirSync(epubFolderPath);
+    for (i in files) {
+        let f = files[i];
+        let fileName = f.split(".")[0];
+        let suffix = f.substring(f.lastIndexOf(".") + 1);
+        if (suffix == "epub") {
+            try {
+                await e2t_main(`${epubFolderPath}/${f}`, `${outputFolderPath}/${fileName}.json`);
+                console.log(`Converted "${fileName}.json"`);
+            } catch (error) {
+                console.log(error);
             }
-        });
-    });
+        } else {
+            console.log(`Skip Convert :: "${f}" Non-epub file.`);
+        }
+    }
 }
 
 
 // 需要考虑异步和同步的问题。异步具有传染性，一个异步则全部异步。
-function main() {
+async function main() {
     // 加入CL问询功能。
     console.log("开始执行转换！");
-    slice_epubs();
+    await slice_epubs();
+    console.log("全部转换完成！按任意键退出。");
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
+    process.stdin.on('data', process.exit.bind(process, 0));
 }
 
 
