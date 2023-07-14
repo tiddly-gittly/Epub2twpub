@@ -21,9 +21,9 @@ class TextExtractor {
 
 
   /**
-   * @description 从文件中获取内容，使用这个内容通过JSDOM获得dom对象。然后通过getPageText传入DOm获得格式化的结构。
-   * @param {string} href 文件名 Text/chapter82.xhtml
-   * @returns 返回一个结构：{chunks: [], stylsheets: [text]}。
+   * @description 从文件中获取内容，通过JSDOM解析内容获得dom对象。然后通过getStructure传入DOM获得格式化的结构，返回结构。
+   * @param {string} href filename: Text/chapter82.xhtml, But the first character cannot be a '/'
+   * @returns Return a structure：{chunks: [], stylsheets: [text]}。
    */
   async getPageText(href) {
     const { type, contents } = await this.getFile(href);

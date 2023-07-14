@@ -12,7 +12,7 @@ class TwpubPlugin {
 
 	constructor (app,options) {
 		this.app = app;
-		this.epubReader = options.epubReader;
+		this.epubReader = options.epubReader; // EpubReader object instance
 		this.fields = {}; // Fields of the plugin tiddler itself
 		this.tiddlers = {}; // Payload tiddlers
 		this.errors = []; // Array of conversion errors
@@ -50,7 +50,7 @@ class TwpubPlugin {
 		this.fields["count-images"] = Object.keys(this.epubReader.images).length.toString();
 		// Cover tab
 		if(this.epubReader.hasMetadataItem("cover")) {
-			// 仅使用文件名。
+			// Use only the file name.
 			const href = this.epubReader.getManifestItem(this.epubReader.getMetadataItem("cover")).href;
 			if(href) {
 				this.fields["cover-image"] = this.titlePrefix + "/images/" + href;
@@ -104,7 +104,7 @@ class TwpubPlugin {
 	}
 	
 	/**
-	 * 创建锚点到标题映射, chunk.href 来着 startChunk()函数。
+	 * Create an anchor to title map, chunk.href from the startChunk() function.
 	 */
 	createAnchorToTitleMapping() {
 		this.mapAnchorToTitle = Object.create(null);
@@ -125,8 +125,8 @@ class TwpubPlugin {
 
 	/**
 	 * 制作文本Tiddler标题
-	 * @param {*} index 0-n, 整数
-	 * @returns '$:/plugins/twpub/id/text/000000001'
+	 * @param {*} index 0-n, integer
+	 * @returns Similar: '$:/plugins/twpub/id/text/000000001'
 	 */
 	makeTextTiddlerTitle(index) {
 		return this.titlePrefix + "/text/" + index.toString().padStart(9,"0");
@@ -166,8 +166,6 @@ class TwpubPlugin {
 						// Replace <img> tags with <$image> widgets
 						case "img":
 							node.tag = "$image";
-							// 图片文件名来自 get-page-text.js文件的 if(e.hasAttribute("src"))段落的 attributes.src语句
-							// 在这里引用图片条目。
 							node.attributes.source = this.titlePrefix + "/images/" + node.attributes.src;
 							delete node.attributes.src;
 							break;
@@ -284,7 +282,7 @@ class TwpubPlugin {
 	}
 
 	/**
-	 * 转换图片为条目，方便复用。
+	 * Convert book images to articles for easy reuse.
 	 */
 	convertImages() {
 		for(const imagePath in this.epubReader.images) {
@@ -302,9 +300,9 @@ class TwpubPlugin {
 		this.tiddlers[fields.title] = fields;
 	}
 
-	/*
-	Get the JSON of the entire plugin
-	*/
+	/**
+	 * Get the JSON of the entire plugin
+	 */
 	getPluginText() {
 		this.fields.text = JSON.stringify({tiddlers: this.tiddlers},null,4)
 		// Replace "<" with "\u003c" to avoid HTML parsing errors when the JSON is embedded in a script tag
