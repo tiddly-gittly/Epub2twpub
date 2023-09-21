@@ -1,25 +1,16 @@
 #!/usr/bin/env node
 
 const fs = require("fs"),
-    path = require("path"),
     { promisify } = require("util"),
+    readFileAsync = promisify(fs.readFile),
     writeFileAsync = promisify(fs.writeFile),
-    { EpubReader } = require("./epub2twpub/epub-reader"),
-    { TwpubPlugin } = require("./epub2twpub/twpub-plugin");
+    { Epub2twpub } = require("./epub2twpub/index");
 
 
-async function e2t_main(epubFile, outputFile) {
-    let e2t = { version: "" };
-    e2t.version = require("./package.json").version;
-    // Setup the epub
-    let epubReader = new EpubReader(e2t);
-    await epubReader.load(epubFile);
-    // Create the twpub plugin
-    let twpubPlugin = new TwpubPlugin(e2t, { epubReader: epubReader });
-    // Convert the epub
-    twpubPlugin.convertEpub();
-    // Save the twpub plugin
-    await writeFileAsync(outputFile, twpubPlugin.getPluginText(), "utf8");
+async function convertEpub(epubFile, outputFile) {
+    const App = new Epub2twpub(epubFile);
+    const pluginText = await App.convert();
+    await writeFileAsync(outputFile, pluginText, "utf8");
 }
 
 
@@ -53,10 +44,10 @@ async function slice_epubs(epubFolderPath, outputFolderPath) {
         let suffix = f.substring(f.lastIndexOf(".") + 1);
         if (suffix == "epub") {
             try {
-                await e2t_main(`${epubFolderPath}/${f}`, `${outputFolderPath}/${fileName}.json`);
+                await convertEpub(`${epubFolderPath}/${f}`, `${outputFolderPath}/${fileName}.json`);
                 console.log(`Converted "${fileName}.json"`);
             } catch (error) {
-                console.log(error);
+                console.log(error.message);
             }
         } else {
             console.log(`Skip Convert :: "${f}" Non-epub file.`);

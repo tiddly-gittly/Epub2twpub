@@ -2,48 +2,30 @@
 Convert an EPUB file into a TWPUB plugin
 */
 
-const fs = require("fs"),
-	path = require("path"),
-	{promisify} = require("util"),
-	readFileAsync = promisify(fs.readFile),
-	writeFileAsync = promisify(fs.writeFile),
-	{ArgParser} = require("./utils"),
-	{EpubReader} = require("./epub-reader"),
-	{TwpubPlugin} = require("./twpub-plugin");
+const { EpubReader } = require("./epub-reader"),
+	{ TwpubPlugin } = require("./twpub-plugin");
 
-class App {
 
-	constructor(args) {
+class Epub2twpub {
+
+	constructor(epub) {
 		// Get our app version number
 		this.version = require("../package.json").version;
 		// Parse arguments
-		this.args = new ArgParser(args,{
-			defaultOption: "epub",
-			mandatoryArguments: {
-				epub: "single",
-				output: "single"
-			}
-		});
+		this.epub = epub;
 	}
 
-	async main() {
-		// Setup the epub
+	/**
+	 * 
+	 * @returns 转换完成的twpub插件书籍。
+	 */
+	async convert() {
 		this.epubReader = new EpubReader(this);
-		await this.epubReader.load(this.args.byName.epub[0]);
-		// Create the twpub plugin
-		this.twpubPlugin = new TwpubPlugin(this,{epubReader: this.epubReader});
-		// Convert the epub
+		await this.epubReader.load(this.epub);
+		this.twpubPlugin = new TwpubPlugin(this, { epubReader: this.epubReader });
 		this.twpubPlugin.convertEpub();
-		// Save the twpub plugin
-		await writeFileAsync(this.args.byName.output[0],this.twpubPlugin.getPluginText(),"utf8");
+		return this.twpubPlugin.getPluginText();
 	}
 }
 
-const app = new App(process.argv.slice(2));
-
-app.main().then(() => {
-	process.exit(0);
-}).catch(err => {
-	console.error(err);
-	process.exit(1);
-});
+exports.Epub2twpub = Epub2twpub;
