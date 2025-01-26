@@ -18,8 +18,8 @@ dependencies:
     specifier: ^3.10.1
     version: 3.10.1
   tiddlywiki:
-    specifier: 5.3.3
-    version: 5.3.3
+    specifier: 5.3.6
+    version: 5.3.6
 
 devDependencies:
   pkg:
@@ -1244,12 +1244,11 @@ packages:
       readable-stream: 3.6.2
     dev: true
 
-  /tiddlywiki@5.3.3:
-    resolution: {integrity: sha512-PkgVfZNpFFHyMmfFw91igXOJn8Z7IWg3NGXOX5EBqJwzGNeYYOIUg4FqCNsWoqBece20HxtkDue/vTf2jDtdZQ==}
+  /tiddlywiki@5.3.6:
+    resolution: {integrity: sha512-RfWt+Bo/UsTdzP5N4nEInjaJjgAzylUMf21hE4FL5v65c3x054+A+3g3sgW1m68lTJbTbiiqSZ6q6BEIZMwhSQ==}
     engines: {node: '>=0.8.2'}
     hasBin: true
     dev: false
-    bundledDependencies: []
 
   /tldts-core@6.1.71:
     resolution: {integrity: sha512-LRbChn2YRpic1KxY+ldL1pGXN/oVvKfCVufwfVzEQdFYNo39uF7AJa/WXdo+gYO7PTvdfkCPCed6Hkvz/kR7jg==}

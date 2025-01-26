@@ -16,7 +16,7 @@
     "css": "^3.0.0",
     "jsdom": "26.0.0",
     "jszip": "^3.10.1",
-    "tiddlywiki": "5.3.3"
+    "tiddlywiki": "5.3.6"
   },
   "devDependencies": {
     "pkg": "^5.8.1",
