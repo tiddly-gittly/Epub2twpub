@@ -16,7 +16,7 @@ dependencies:
     version: 26.0.0
   jszip:
     specifier: ^3.10.1
-    version: 3.10.1
+    version: 3.10.2
   tiddlywiki:
     specifier: 5.3.6
     version: 5.3.6
@@ -751,8 +751,8 @@ packages:
       graceful-fs: 4.2.11
     dev: true
 
-  /jszip@3.10.1:
-    resolution: {integrity: sha512-xXDvecyTpGLrqFrvkrUSoxxfJI5AH7U8zxxtVclpsUtMCq4JQ290LY8AW5c7Ggnr/Y/oK+bQMbqK2qmtk3pN4g==}
+  /jszip@3.10.2:
+    resolution: {integrity: sha512-3l+rb15IOWtUhU0H5MFqES/T6Kh7abYwjosBey/vD6hDt8zoEffkSC5Ws5SGtgVw3gBx2NEbhTeSW1+kWkpyTQ==}
     dependencies:
       lie: 3.3.0
       pako: 1.0.11
