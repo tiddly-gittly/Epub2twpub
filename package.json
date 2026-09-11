@@ -14,7 +14,7 @@
   "dependencies": {
     "@xmldom/xmldom": "^0.9.0",
     "css": "^3.0.0",
-    "jsdom": "26.0.0",
+    "jsdom": "26.1.0",
     "jszip": "^3.10.1",
     "tiddlywiki": "5.3.6"
   },
